@@ -21,7 +21,6 @@ export default function Dashboard() {
     { label: 'Win Rate', value: profile?.win_rate || '0%', icon: TrendingUp, color: 'neonCyan' },
   ]
 
-  // ═══ Load Data ═══
   useEffect(() => {
     loadData()
   }, [])
@@ -29,7 +28,6 @@ export default function Dashboard() {
   const loadData = async () => {
     setLoading(true)
 
-    // Load upcoming matches
     const { data: matchData } = await supabase
       .from('matches')
       .select('*')
@@ -39,7 +37,6 @@ export default function Dashboard() {
 
     setMatches(matchData || [])
 
-    // Load top players
     const { data: lbData } = await supabase
       .from('leaderboard')
       .select('*, profiles(full_name, ign)')
@@ -64,53 +61,53 @@ export default function Dashboard() {
   const displayName = profile?.full_name || user?.email?.split('@')[0] || 'Operator'
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-10">
 
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8"
+        className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-6 sm:mb-8"
       >
         <div>
-          <h1 className="font-display font-black text-3xl md:text-4xl italic tracking-wide">
+          <h1 className="font-display font-black text-2xl sm:text-3xl md:text-4xl italic tracking-wide">
             COMMAND <span className="neon-text-gold">CENTER</span>
           </h1>
-          <p className="mt-2 text-sm font-mono text-white/60">
-            Welcome back, <span className="text-neonCyan font-bold">{displayName}</span>
+          <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm font-mono text-white/60">
+            Welcome back, <span className="text-neonCyan font-bold truncate">{displayName}</span>
           </p>
         </div>
 
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/40 bg-green-500/10 self-start">
+        <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-green-500/40 bg-green-500/10 self-start">
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-xs font-mono font-bold tracking-wider text-green-400 uppercase">
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-wider text-green-400 uppercase">
             Online
           </span>
         </div>
       </motion.div>
 
-      {/* Warning Banner — only if profile incomplete */}
+      {/* Warning Banner */}
       {(!profile?.ign || !profile?.ff_uid) && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="glass-card p-5 mb-8 border-neonGold/40 flex flex-col md:flex-row items-start md:items-center gap-4"
+          className="glass-card p-4 sm:p-5 mb-6 sm:mb-8 border-neonGold/40 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4"
         >
-          <div className="p-3 rounded-lg bg-neonGold/10 border border-neonGold/30 flex-shrink-0">
-            <AlertTriangle size={22} className="text-neonGold" />
+          <div className="p-2.5 sm:p-3 rounded-lg bg-neonGold/10 border border-neonGold/30 flex-shrink-0">
+            <AlertTriangle size={18} className="text-neonGold sm:w-[22px] sm:h-[22px]" />
           </div>
-          <div className="flex-1">
-            <h3 className="font-display font-bold text-neonGold text-sm tracking-wider uppercase">
+          <div className="flex-1 min-w-0">
+            <h3 className="font-display font-bold text-neonGold text-xs sm:text-sm tracking-wider uppercase">
               Gaming Profile Incomplete
             </h3>
-            <p className="text-xs font-mono text-white/60 mt-1">
+            <p className="text-[10px] sm:text-xs font-mono text-white/60 mt-1">
               Please add your In-Game Name (IGN) and Free Fire UID so squad leaders and admins can verify you for tournament operations.
             </p>
           </div>
           <Link
             to="/profile"
-            className="px-5 py-2.5 rounded-md font-display font-bold text-xs tracking-wider uppercase text-black bg-gradient-to-r from-neonGold to-gold hover:shadow-glow-gold transition-all flex-shrink-0"
+            className="w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 rounded-md font-display font-bold text-[10px] sm:text-xs tracking-wider uppercase text-black bg-gradient-to-r from-neonGold to-gold hover:shadow-glow-gold transition-all text-center flex-shrink-0"
           >
             Set In-Game Details
           </Link>
@@ -118,24 +115,24 @@ export default function Dashboard() {
       )}
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-10">
         {stats.map((s, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 + i * 0.05 }}
-            className="glass-card p-5 hover:scale-105 transition-transform"
+            className="glass-card p-3 sm:p-5 hover:scale-[1.02] sm:hover:scale-105 transition-transform"
           >
-            <div className="flex items-start justify-between">
-              <p className="text-[10px] font-mono font-bold tracking-widest text-white/50 uppercase">
+            <div className="flex items-start justify-between gap-2">
+              <p className="text-[9px] sm:text-[10px] font-mono font-bold tracking-widest text-white/50 uppercase leading-tight">
                 {s.label}
               </p>
-              <div className={`p-2 rounded-md bg-${s.color}/10 border border-${s.color}/30`}>
-                <s.icon size={16} className={`text-${s.color}`} />
+              <div className={`p-1.5 sm:p-2 rounded-md bg-${s.color}/10 border border-${s.color}/30 flex-shrink-0`}>
+                <s.icon size={12} className={`text-${s.color} sm:w-4 sm:h-4`} />
               </div>
             </div>
-            <p className="mt-3 font-display font-black text-4xl italic text-white">
+            <p className="mt-2 sm:mt-3 font-display font-black text-2xl sm:text-4xl italic text-white">
               {s.value}
             </p>
           </motion.div>
@@ -143,66 +140,66 @@ export default function Dashboard() {
       </div>
 
       {/* Two Column: Upcoming + Top Players */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
 
         {/* Upcoming Operations */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35 }}
-          className="lg:col-span-2 glass-card p-6"
+          className="lg:col-span-2 glass-card p-4 sm:p-6"
         >
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0 mb-4 sm:mb-6">
             <div className="flex items-center gap-2">
-              <Flame size={18} className="text-orangeRed" />
-              <h2 className="font-display font-bold italic text-lg tracking-wide">
+              <Flame size={16} className="text-orangeRed sm:w-[18px] sm:h-[18px]" />
+              <h2 className="font-display font-bold italic text-base sm:text-lg tracking-wide">
                 Upcoming <span className="neon-text-cyan">Operations</span>
               </h2>
             </div>
             <Link
               to="/matches"
-              className="text-xs font-mono font-bold text-neonCyan hover:text-neonGold transition flex items-center gap-1"
+              className="text-[10px] sm:text-xs font-mono font-bold text-neonCyan hover:text-neonGold transition flex items-center gap-1 self-start sm:self-auto"
             >
-              View All Matches <ArrowRight size={12} />
+              View All Matches <ArrowRight size={10} />
             </Link>
           </div>
 
           {loading ? (
             <div className="py-10 text-center">
-              <Loader2 size={32} className="text-neonCyan animate-spin mx-auto" />
+              <Loader2 size={28} className="text-neonCyan animate-spin mx-auto" />
             </div>
           ) : matches.length === 0 ? (
-            <div className="py-16 text-center border border-dashed border-white/10 rounded-lg">
-              <p className="text-sm font-mono text-white/40">
+            <div className="py-10 sm:py-16 text-center border border-dashed border-white/10 rounded-lg">
+              <p className="text-xs sm:text-sm font-mono text-white/40 px-4">
                 No upcoming operations scheduled right now. Check back soon!
               </p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {matches.map((m) => (
                 <Link
                   key={m.id}
                   to="/matches"
-                  className="block p-4 rounded-md border border-white/10 hover:border-neonCyan/40 transition"
+                  className="block p-3 sm:p-4 rounded-md border border-white/10 hover:border-neonCyan/40 transition"
                 >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="font-display font-bold text-white">{m.title}</h3>
-                      <div className="flex flex-wrap gap-3 mt-2 text-[10px] font-mono text-white/50">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-display font-bold text-sm sm:text-base text-white truncate">{m.title}</h3>
+                      <div className="flex flex-wrap gap-2 sm:gap-3 mt-1.5 sm:mt-2 text-[9px] sm:text-[10px] font-mono text-white/50">
                         <span className="flex items-center gap-1">
-                          <Map size={10} className="text-neonCyan" /> {m.map}
+                          <Map size={9} className="text-neonCyan" /> {m.map}
                         </span>
                         <span className="flex items-center gap-1">
-                          <Users size={10} className="text-neonCyan" /> {m.mode}
+                          <Users size={9} className="text-neonCyan" /> {m.mode}
                         </span>
                         <span className="flex items-center gap-1">
-                          <Clock size={10} className="text-neonCyan" /> {formatDate(m.start_time)}
+                          <Clock size={9} className="text-neonCyan" /> {formatDate(m.start_time)}
                         </span>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-[10px] font-mono text-white/40 uppercase">Prize</p>
-                      <p className="font-display font-bold text-green-400">₹{m.prize_pool}</p>
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase">Prize</p>
+                      <p className="font-display font-bold text-xs sm:text-sm text-green-400">₹{m.prize_pool}</p>
                     </div>
                   </div>
                 </Link>
@@ -216,52 +213,52 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="glass-card p-6"
+          className="glass-card p-4 sm:p-6"
         >
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
             <div className="flex items-center gap-2">
-              <Trophy size={18} className="text-neonGold" />
-              <h2 className="font-display font-bold italic text-lg tracking-wide">
+              <Trophy size={16} className="text-neonGold sm:w-[18px] sm:h-[18px]" />
+              <h2 className="font-display font-bold italic text-base sm:text-lg tracking-wide">
                 Top <span className="neon-text-gold">Players</span>
               </h2>
             </div>
             <Link
               to="/leaderboards"
-              className="text-xs font-mono text-neonGold/70 hover:text-neonGold transition"
+              className="text-[10px] sm:text-xs font-mono text-neonGold/70 hover:text-neonGold transition"
             >
               All →
             </Link>
           </div>
 
           {loading ? (
-            <div className="py-10 text-center">
-              <Loader2 size={24} className="text-neonGold animate-spin mx-auto" />
+            <div className="py-8 text-center">
+              <Loader2 size={20} className="text-neonGold animate-spin mx-auto" />
             </div>
           ) : leaderboard.length === 0 ? (
-            <div className="py-10 text-center">
-              <p className="text-xs font-mono text-white/40">
+            <div className="py-8 text-center">
+              <p className="text-[10px] sm:text-xs font-mono text-white/40">
                 No rankings recorded yet.
               </p>
             </div>
           ) : (
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {leaderboard.map((p, i) => (
                 <li
                   key={p.id}
-                  className="flex items-center gap-3 p-2 rounded-md hover:bg-white/5 transition"
+                  className="flex items-center gap-2 sm:gap-3 p-1.5 sm:p-2 rounded-md hover:bg-white/5 transition"
                 >
-                  <span className="font-display font-black text-lg text-neonGold w-6">
+                  <span className="font-display font-black text-base sm:text-lg text-neonGold w-5 sm:w-6">
                     {i + 1}
                   </span>
-                  <div className="flex-1">
-                    <p className="text-xs font-bold text-white">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm font-bold text-white truncate">
                       {p.profiles?.ign || p.profiles?.full_name || 'Unknown'}
                     </p>
-                    <p className="text-[10px] font-mono text-white/40">
+                    <p className="text-[9px] sm:text-[10px] font-mono text-white/40">
                       {p.kills} kills • {p.wins} wins
                     </p>
                   </div>
-                  <span className="font-display font-bold text-xs text-neonGold">
+                  <span className="font-display font-bold text-xs sm:text-sm text-neonGold flex-shrink-0">
                     {p.points}
                   </span>
                 </li>
@@ -276,29 +273,29 @@ export default function Dashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.45 }}
-        className="glass-card p-8 text-center border-neonCyan/30"
+        className="glass-card p-6 sm:p-8 text-center border-neonCyan/30"
       >
-        <div className="inline-flex p-3 rounded-full bg-neonCyan/10 border border-neonCyan/40 mb-4">
-          <Shield size={28} className="text-neonCyan" />
+        <div className="inline-flex p-2.5 sm:p-3 rounded-full bg-neonCyan/10 border border-neonCyan/40 mb-3 sm:mb-4">
+          <Shield size={24} className="text-neonCyan sm:w-7 sm:h-7" />
         </div>
 
-        <h2 className="font-display font-black text-2xl md:text-3xl italic">
+        <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl italic">
           READY TO <span className="neon-text-cyan">BATTLE</span>?
         </h2>
-        <p className="mt-3 text-sm font-mono text-white/60 max-w-md mx-auto">
+        <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-mono text-white/60 max-w-md mx-auto px-2">
           Assemble your squad, select your map, and join active Free Fire tournaments.
         </p>
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+        <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center px-2 sm:px-0">
           <Link
             to="/teams"
-            className="px-6 py-3 font-display font-bold text-xs tracking-wider uppercase rounded-md border-2 border-white/30 text-white hover:border-white hover:bg-white/5 transition-all"
+            className="px-5 sm:px-6 py-2.5 sm:py-3 font-display font-bold text-[10px] sm:text-xs tracking-wider uppercase rounded-md border-2 border-white/30 text-white hover:border-white hover:bg-white/5 transition-all text-center"
           >
             Manage Squad
           </Link>
           <Link
             to="/matches"
-            className="px-6 py-3 font-display font-bold text-xs tracking-wider uppercase rounded-md text-black bg-gradient-to-r from-neonCyan to-neonBlue hover:shadow-glow-blue transition-all"
+            className="px-5 sm:px-6 py-2.5 sm:py-3 font-display font-bold text-[10px] sm:text-xs tracking-wider uppercase rounded-md text-black bg-gradient-to-r from-neonCyan to-neonBlue hover:shadow-glow-blue transition-all text-center"
           >
             Join Active Match
           </Link>

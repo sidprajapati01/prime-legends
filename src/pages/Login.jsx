@@ -1,152 +1,248 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Mail, Lock, LogIn, Loader2 } from 'lucide-react'
-import Logo from '../components/Logo'
-import { useAuth } from '../context/AuthContext'
+import {
+  Users, Trophy, Clock, MessageCircle, Instagram, Youtube, Flame,
+  Shield, BarChart3, MessageSquare
+} from 'lucide-react'
 
-export default function Login() {
-  const navigate = useNavigate()
-  const { signIn, signInWithGoogle } = useAuth()
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
-    try {
-      await signIn(email, password)
-      navigate('/dashboard')
-    } catch (err) {
-      setError(err.message || 'Login failed. Check your credentials.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleGoogle = async () => {
-    try {
-      await signInWithGoogle()
-    } catch (err) {
-      setError(err.message)
-    }
-  }
-
+export default function Landing() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-16 bg-darkBg relative overflow-hidden">
-      <div className="absolute inset-0 grid-bg pointer-events-none" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-neonGold/10 blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-neonCyan/10 blur-3xl" />
+    <div className="relative overflow-x-hidden">
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 w-full max-w-md glass-card p-8 border-neonGold/30 shadow-glow-gold"
-      >
-        <div className="flex justify-center mb-8">
-          <Logo size="lg" showText={true} />
-        </div>
+      {/* ═══ HERO SECTION ═══ */}
+      <section className="relative min-h-[80vh] sm:min-h-[85vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 py-12 sm:py-0 overflow-hidden">
 
-        <div className="text-center mb-8">
-          <h1 className="font-display font-black text-3xl italic tracking-wide text-white">
-            WELCOME <span className="neon-text-gold">BACK</span>
-          </h1>
-          <p className="mt-2 text-xs font-mono text-white/50">
-            Sign in to continue to your command center
-          </p>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 z-0" />
 
-        {error && (
-          <div className="mb-5 p-3 rounded-md border border-red-500/40 bg-red-500/10">
-            <p className="text-xs font-mono text-red-400">{error}</p>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <label className="block">
-            <span className="block text-[10px] font-mono font-bold tracking-widest text-white/60 uppercase mb-2">
-              Email Address
-            </span>
-            <div className="relative">
-              <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                className="w-full pl-11 pr-4 py-3 rounded-md bg-black/60 border border-white/10 text-white text-sm font-mono placeholder-white/30 focus:outline-none focus:border-neonGold/60 focus:shadow-glow-gold transition"
-              />
-            </div>
-          </label>
-
-          <label className="block">
-            <span className="block text-[10px] font-mono font-bold tracking-widest text-white/60 uppercase mb-2">
-              Password
-            </span>
-            <div className="relative">
-              <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                className="w-full pl-11 pr-4 py-3 rounded-md bg-black/60 border border-white/10 text-white text-sm font-mono placeholder-white/30 focus:outline-none focus:border-neonGold/60 focus:shadow-glow-gold transition"
-              />
-            </div>
-          </label>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3.5 rounded-md font-display font-bold text-xs tracking-widest uppercase text-black bg-gradient-to-r from-neonGold to-gold hover:shadow-glow-gold transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-          >
-            {loading ? <Loader2 size={14} className="animate-spin" /> : <LogIn size={14} />}
-            {loading ? 'Signing in...' : 'Login'}
-          </button>
-        </form>
-
-        <div className="flex items-center gap-3 my-6">
-          <div className="flex-1 h-px bg-white/10" />
-          <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">or</span>
-          <div className="flex-1 h-px bg-white/10" />
-        </div>
-
-        <button
-          type="button"
-          onClick={handleGoogle}
-          className="w-full py-3 rounded-md font-mono font-bold text-xs tracking-wider text-white border border-white/15 hover:border-neonCyan/60 hover:bg-neonCyan/5 transition flex items-center justify-center gap-3"
+        {/* Season badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative z-10 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full border border-neonGold/40 bg-neonGold/5 backdrop-blur-sm mb-6 sm:mb-8"
         >
-          <svg className="w-4 h-4" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-          Sign in with Google
-        </button>
+          <Flame size={12} className="text-neonGold sm:w-[14px] sm:h-[14px]" />
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-neonGold uppercase">
+            Battle Royale Season Live
+          </span>
+        </motion.div>
 
-        <div className="mt-6 text-center space-y-2">
-          <button
-            type="button"
-            className="block w-full text-xs font-mono text-neonCyan hover:text-neonGold transition"
+        {/* Hero heading */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative z-10 font-display font-black text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] italic"
+        >
+          <span className="block text-white">DOMINATE THE</span>
+          <span className="block bg-gradient-to-r from-neonGold via-orangeRed to-neonGold bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(255,215,0,0.5)]">
+            BATTLEGROUNDS
+          </span>
+        </motion.h1>
+
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative z-10 mt-5 sm:mt-8 max-w-2xl text-white/70 font-mono text-xs sm:text-sm md:text-base leading-relaxed px-2"
+        >
+          The ultimate Free Fire esports ecosystem. Drop into Bermuda,
+          lead your squad to victory, and claim the glory.{' '}
+          <span className="text-neonGold font-bold">Real prizes for the last survivor.</span>
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="relative z-10 mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0"
+        >
+          <Link
+            to="/dashboard"
+            className="px-6 sm:px-8 py-3 sm:py-4 font-display font-bold text-xs sm:text-sm tracking-widest text-black uppercase rounded-md bg-gradient-to-r from-neonGold to-gold hover:shadow-glow-gold transition-all duration-300 hover:scale-105 text-center"
           >
-            Forgot Password?
-          </button>
-          <p className="text-xs font-mono text-white/50">
-            Don't have an account?{' '}
-            <Link to="/signup" className="text-neonGold hover:text-neonCyan font-bold transition">
-              Sign Up
-            </Link>
+            Join the Battle
+          </Link>
+          <Link
+            to="/leaderboards"
+            className="px-6 sm:px-8 py-3 sm:py-4 font-display font-bold text-xs sm:text-sm tracking-widest text-neonGold uppercase rounded-md border-2 border-neonGold/50 hover:bg-neonGold/10 hover:shadow-glow-gold transition-all duration-300 text-center"
+          >
+            View Rankings
+          </Link>
+        </motion.div>
+      </section>
+
+      {/* ═══ INFO PILLS ═══ */}
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+
+          {[
+            { icon: Users,  title: 'SQUAD UP',         sub: 'Find Teammates' },
+            { icon: Trophy, title: 'DIAMONDS & CASH',  sub: 'Real Rewards' },
+            { icon: Clock,  title: 'DAILY SCRIMS',     sub: '24/7 Tournaments' },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="glass-card p-4 sm:p-6 flex items-center gap-3 sm:gap-4"
+            >
+              <div className="p-2 sm:p-3 rounded-lg bg-neonGold/10 border border-neonGold/30 flex-shrink-0">
+                <item.icon size={20} className="text-neonGold sm:w-6 sm:h-6" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-display font-bold text-white text-xs sm:text-sm tracking-wider truncate">
+                  {item.title}
+                </h3>
+                <p className="text-[10px] sm:text-xs font-mono text-white/50 mt-0.5 truncate">{item.sub}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ FEATURE CARDS ═══ */}
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 mt-16 sm:mt-24">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="font-display font-black text-2xl sm:text-3xl md:text-5xl italic text-white">
+            WHY <span className="neon-text-gold">PRIME LEGENDS</span>?
+          </h2>
+          <p className="mt-2 sm:mt-3 text-white/50 font-mono text-xs sm:text-sm">
+            Everything you need to dominate the battlefield
           </p>
         </div>
-      </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+
+          {[
+            {
+              icon: Trophy,
+              title: 'Tournaments & Events',
+              desc: 'Join competitive tournaments with real prizes. Participate in daily scrims, climb the ranks and earn your place among champions.',
+              color: 'neonGold',
+            },
+            {
+              icon: Shield,
+              title: 'Team Management',
+              desc: 'Create and manage your esports team. Invite players, assign roles, track performance and build the ultimate squad to dominate.',
+              color: 'neonCyan',
+            },
+            {
+              icon: BarChart3,
+              title: 'Global Stats',
+              desc: 'Track your performance with detailed analytics. View match history, kill stats, win rates and monitor your progress.',
+              color: 'orangeRed',
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.15 }}
+              viewport={{ once: true }}
+              className="glass-card p-6 sm:p-8 group hover:scale-[1.02] sm:hover:scale-105 transition-transform duration-300"
+            >
+              <div className={`p-2.5 sm:p-3 rounded-lg bg-${item.color}/10 border border-${item.color}/30 inline-block mb-4 sm:mb-5`}>
+                <item.icon size={24} className={`text-${item.color} sm:w-7 sm:h-7`} />
+              </div>
+              <h3 className="font-display font-bold text-base sm:text-lg text-white mb-2 sm:mb-3 tracking-wide">
+                {item.title}
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-white/60 leading-relaxed">
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ JOIN THE COMMUNITY ═══ */}
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 mt-16 sm:mt-24">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="font-display font-black text-2xl sm:text-3xl md:text-5xl italic">
+            JOIN THE <span className="neon-text-cyan">COMMUNITY</span>
+          </h2>
+          <p className="mt-2 sm:mt-3 text-white/50 font-mono text-xs sm:text-sm max-w-xl mx-auto px-4">
+            Connect with fellow players, get instant updates, and never miss a tournament. Scan the QR codes or click the buttons below.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {[
+            {
+              name: 'WhatsApp Group',
+              desc: 'Get instant match alerts & room codes',
+              btn: 'Join Group',
+              btnColor: 'bg-green-500 hover:bg-green-600',
+              borderColor: 'border-green-500/40 hover:border-green-500',
+              icon: MessageCircle,
+              link: 'https://chat.whatsapp.com/YOUR_GROUP_LINK',
+            },
+            {
+              name: 'Discord Server',
+              desc: 'Voice chat, scrims & community',
+              btn: 'Join Discord',
+              btnColor: 'bg-indigo-500 hover:bg-indigo-600',
+              borderColor: 'border-indigo-500/40 hover:border-indigo-500',
+              icon: MessageSquare,
+              link: 'https://discord.gg/YOUR_SERVER',
+            },
+            {
+              name: 'Instagram',
+              desc: 'Follow for highlights & giveaways',
+              btn: 'Follow Us',
+              btnColor: 'bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-90',
+              borderColor: 'border-pink-500/40 hover:border-pink-500',
+              icon: Instagram,
+              link: 'https://instagram.com/primelengends',
+            },
+            {
+              name: 'YouTube',
+              desc: 'Subscribe for streams & VODs',
+              btn: 'Subscribe',
+              btnColor: 'bg-red-600 hover:bg-red-700',
+              borderColor: 'border-red-500/40 hover:border-red-500',
+              icon: Youtube,
+              link: 'https://youtube.com/@primelengends',
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className={`glass-card p-5 sm:p-6 text-center ${item.borderColor} transition-all duration-300`}
+            >
+              <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-5 rounded-lg bg-white p-2 sm:p-3 flex items-center justify-center">
+                <div className="w-full h-full bg-black rounded flex items-center justify-center">
+                  <item.icon size={32} className="text-white sm:w-10 sm:h-10" />
+                </div>
+              </div>
+
+              <h3 className="font-display font-bold text-white text-sm sm:text-base mb-1">
+                {item.name}
+              </h3>
+              <p className="text-[10px] sm:text-xs font-mono text-white/50 mb-4 sm:mb-5">{item.desc}</p>
+
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`block w-full py-2.5 sm:py-3 font-display font-bold tracking-wider text-[10px] sm:text-xs text-white uppercase rounded-md ${item.btnColor} transition-all`}
+              >
+                {item.btn}
+              </a>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <div className="h-16 sm:h-24" />
     </div>
   )
 }
