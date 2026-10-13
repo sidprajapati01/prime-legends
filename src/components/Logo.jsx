@@ -1,41 +1,33 @@
-// ⚠️ LOGO SWAP: fakt /public/logo.png replace karo — badhu automatic update thashe
 export default function Logo({ size = 'md', showText = true }) {
   const sizes = {
-    sm: 'w-8 h-8',
-    md: 'w-10 h-10',
-    lg: 'w-14 h-14',
+    sm: 'w-12 h-18',        // ← 32 → 40 (moto)
+    md: 'w-12 h-12',        // ← 40 → 48 (moto)
+    lg: 'w-16 h-16',        // ← 56 → 64 (moto)
+    xl: 'w-20 h-20',        // ← NEW
+  }
+
+  const textSizes = {
+    sm: 'text-sm sm:text-base',    // ← 14 → 16
+    md: 'text-base sm:text-lg',    // ← 16 → 18
+    lg: 'text-lg sm:text-xl',      // ← 18 → 20
+    xl: 'text-xl sm:text-2xl',     // ← NEW
   }
 
   return (
-    <div className="flex items-center gap-3">
-      {/* Logo image */}
-      <div className={`${sizes[size]} relative`}>
-        <img
-          src="/logo.png"
-          alt="PRIME LEGENDS"
-          className="w-full h-full object-contain drop-shadow-[0_0_12px_rgba(255,215,0,0.6)]"
-          onError={(e) => {
-            // Fallback: jo logo.png na hoy to "PL" monogram dekhay
-            e.target.style.display = 'none'
-            e.target.nextSibling.style.display = 'flex'
-          }}
-        />
-        {/* Fallback monogram */}
-        <div
-          className="hidden w-full h-full items-center justify-center rounded-full border-2 border-neonGold text-neonGold font-display font-bold text-sm"
-          style={{ display: 'none' }}
-        >
-          PL
-        </div>
-      </div>
+    <div className="flex items-center gap-2 sm:gap-2.5">
+      {/* Logo Image */}
+      <img
+        src="/logo.png"
+        alt="PRIME LEGENDS"
+        className={`${sizes[size]} object-contain flex-shrink-0`}
+      />
 
-      {/* Text */}
       {showText && (
         <div className="flex flex-col leading-none">
-          <span className="font-display font-black text-lg tracking-wider text-white">
+          <span className={`font-display font-black tracking-wider text-white ${textSizes[size]}`}>
             PRIME
           </span>
-          <span className="font-display font-black text-lg tracking-wider neon-text-gold">
+          <span className={`font-display font-black tracking-wider neon-text-gold ${textSizes[size]}`}>
             LEGENDS
           </span>
         </div>
