@@ -6,9 +6,8 @@ export default function Landing() {
   return (
     <div className="relative overflow-x-hidden">
 
-      {/* HERO SECTION */}
+      {/* ═══ HERO SECTION ═══ */}
       <section className="relative min-h-[80vh] sm:min-h-[85vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 py-12 sm:py-0 overflow-hidden">
-
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 z-0" />
 
         {/* Season badge */}
@@ -71,7 +70,7 @@ export default function Landing() {
         </motion.div>
       </section>
 
-      {/* INFO PILLS */}
+      {/* ═══ INFO PILLS ═══ */}
       <section className="relative max-w-6xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {[
@@ -94,14 +93,16 @@ export default function Landing() {
                 <h3 className="font-display font-bold text-white text-xs sm:text-sm tracking-wider truncate">
                   {item.title}
                 </h3>
-                <p className="text-[10px] sm:text-xs font-mono text-white/50 mt-0.5 truncate">{item.sub}</p>
+                <p className="text-[10px] sm:text-xs font-mono text-white/50 mt-0.5 truncate">
+                  {item.sub}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* FEATURE CARDS */}
+      {/* ═══ FEATURE CARDS ═══ */}
       <section className="relative max-w-6xl mx-auto px-4 sm:px-6 mt-16 sm:mt-24">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="font-display font-black text-2xl sm:text-3xl md:text-5xl italic text-white">
@@ -155,62 +156,27 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* JOIN THE COMMUNITY */}
+      {/* ═══ JOIN THE COMMUNITY ═══ */}
       <section className="relative max-w-6xl mx-auto px-4 sm:px-6 mt-16 sm:mt-24">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="font-display font-black text-2xl sm:text-3xl md:text-5xl italic">
             JOIN THE <span className="neon-text-cyan">COMMUNITY</span>
           </h2>
           <p className="mt-2 sm:mt-3 text-white/50 font-mono text-xs sm:text-sm max-w-xl mx-auto px-4">
-            Connect with fellow players, get instant updates, and never miss a tournament. Join our community below.
+            Connect with fellow players, get instant updates, and never miss a tournament.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           {[
             {
-              name: 'WhatsApp Group',
-              desc: 'Get instant match alerts & room codes',
+              name: 'WhatsApp',
+              desc: 'Match alerts & room codes',
               btn: 'Join Group',
               btnColor: 'bg-green-500 hover:bg-green-600',
               borderColor: 'border-green-500/40 hover:border-green-500',
-              // ⚠️ PASTE IMAGE URL HERE:
-              logo: 'https://cdn.simpleicons.org/whatsapp/25D366',
-              // ⚠️ PASTE COMMUNITY LINK HERE:
-              link: 'https://whatsapp.com/channel/0029VbDzPhD2v1ImyriHNj20',
-            },
-            {
-              name: 'Discord Server',
-              desc: 'Voice chat, scrims & community',
-              btn: 'Join Discord',
-              btnColor: 'bg-indigo-500 hover:bg-indigo-600',
-              borderColor: 'border-indigo-500/40 hover:border-indigo-500',
-              // ⚠️ PASTE IMAGE URL HERE:
-              logo: 'https://cdn.simpleicons.org/discord/5865F2',
-              // ⚠️ PASTE COMMUNITY LINK HERE:
-              link: 'https://discord.gg/dWTzy2zpd',
-            },
-            {
-              name: 'Instagram',
-              desc: 'Follow for highlights & giveaways',
-              btn: 'Follow Us',
-              btnColor: 'bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-90',
-              borderColor: 'border-pink-500/40 hover:border-pink-500',
-              // ⚠️ PASTE IMAGE URL HERE:
-              logo: 'https://cdn.simpleicons.org/instagram/E4405F',
-              // ⚠️ PASTE COMMUNITY LINK HERE:
-              link: 'https://www.instagram.com/invites/contact/?utm_content=b2n5a90&stkn=19wk612kckd2o',
-            },
-            {
-              name: 'YouTube',
-              desc: 'Subscribe for streams & VODs',
-              btn: 'Subscribe',
-              btnColor: 'bg-red-600 hover:bg-red-700',
-              borderColor: 'border-red-500/40 hover:border-red-500',
-              // ⚠️ PASTE IMAGE URL HERE:
-              logo: 'https://cdn.simpleicons.org/youtube/FF0000',
-              // ⚠️ PASTE COMMUNITY LINK HERE:
-              link: 'https://youtube.com/@primelegends-0044?si=RMFFmMyJeFkoW-xa',
+              logo: 'https://api.iconify.design/logos:whatsapp-icon.svg',
+              link: 'https://chat.whatsapp.com/YOUR_GROUP_LINK',
             },
             {
               name: 'Facebook',
@@ -218,50 +184,78 @@ export default function Landing() {
               btn: 'Like Page',
               btnColor: 'bg-blue-600 hover:bg-blue-700',
               borderColor: 'border-blue-500/40 hover:border-blue-500',
-              logo: 'https://cdn.simpleicons.org/facebook/1877F2',
-              link: 'https://www.facebook.com/share/1H5iTHhL9v/?ref=1',
+              logo: 'https://api.iconify.design/logos:facebook.svg',
+              link: 'https://facebook.com/primelengends',
             },
             {
-              name: 'Telegaram',
-              desc: 'Like our page for updates',
-              btn: 'Like Page',
-              btnColor: 'bg-blue-600 hover:bg-blue-700',
-              borderColor: 'border-blue-500/40 hover:border-blue-500',
-              logo: 'https://cdn.simpleicons.org/telegram/1877F2',
-              link: 'https://t.me/+72MIoqo-gRs4MzY9',
+              name: 'Discord',
+              desc: 'Voice chat & scrims',
+              btn: 'Join Discord',
+              btnColor: 'bg-indigo-500 hover:bg-indigo-600',
+              borderColor: 'border-indigo-500/40 hover:border-indigo-500',
+              logo: 'https://api.iconify.design/logos:discord-icon.svg',
+              link: 'https://discord.gg/YOUR_SERVER',
+            },
+            {
+              name: 'Instagram',
+              desc: 'Highlights & giveaways',
+              btn: 'Follow Us',
+              btnColor: 'bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-90',
+              borderColor: 'border-pink-500/40 hover:border-pink-500',
+              logo: 'https://cdn.simpleicons.org/instagram/E4405F',
+              link: 'https://instagram.com/primelengends',
+            },
+            {
+              name: 'YouTube',
+              desc: 'Streams & VODs',
+              btn: 'Subscribe',
+              btnColor: 'bg-red-600 hover:bg-red-700',
+              borderColor: 'border-red-500/40 hover:border-red-500',
+              logo: 'https://api.iconify.design/logos:youtube-icon.svg',
+              link: 'https://youtube.com/@primelengends',
+            },
+            {
+              name: 'Telegram',
+              desc: 'Instant updates & chat',
+              btn: 'Join Channel',
+              btnColor: 'bg-sky-500 hover:bg-sky-600',
+              borderColor: 'border-sky-500/40 hover:border-sky-500',
+              logo: 'https://api.iconify.design/logos:telegram.svg',
+              link: 'https://t.me/primelengends',
             },
           ].map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
               viewport={{ once: true }}
-              className={`glass-card p-5 sm:p-6 text-center ${item.borderColor} transition-all duration-300`}
+              className={`glass-card p-4 sm:p-5 text-center ${item.borderColor} transition-all duration-300`}
             >
-              {/* Logo image — Direct URL */}
-              <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 sm:mb-5 flex items-center justify-center">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 flex items-center justify-center">
                 <img
                   src={item.logo}
                   alt={item.name}
                   className="w-full h-full object-contain"
                   onError={(e) => {
-                    console.warn(`Image failed to load: ${item.logo}`)
+                    console.warn(`Image failed: ${item.logo}`)
                     e.target.style.opacity = '0.3'
                   }}
                 />
               </div>
 
-              <h3 className="font-display font-bold text-white text-sm sm:text-base mb-1">
+              <h3 className="font-display font-bold text-white text-sm mb-1">
                 {item.name}
               </h3>
-              <p className="text-[10px] sm:text-xs font-mono text-white/50 mb-4 sm:mb-5">{item.desc}</p>
+              <p className="text-[10px] font-mono text-white/50 mb-3 min-h-[26px]">
+                {item.desc}
+              </p>
 
               <a
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`block w-full py-2.5 sm:py-3 font-display font-bold tracking-wider text-[10px] sm:text-xs text-white uppercase rounded-md ${item.btnColor} transition-all`}
+                className={`block w-full py-2 font-display font-bold tracking-wider text-[10px] text-white uppercase rounded-md ${item.btnColor} transition-all`}
               >
                 {item.btn}
               </a>

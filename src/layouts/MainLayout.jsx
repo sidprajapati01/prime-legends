@@ -14,7 +14,7 @@ export default function MainLayout() {
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.04] sm:opacity-[0.05]"
         style={{
           backgroundImage: 'url(/bg-logo.png)',
-          backgroundSize: 'min(100vw, 50000px) auto',
+          backgroundSize: 'min(100vw, 1000px) auto',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}

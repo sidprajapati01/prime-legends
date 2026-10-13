@@ -6,7 +6,6 @@ export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth()
   const location = useLocation()
 
-  // Show loading while checking auth
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-darkBg">
@@ -15,11 +14,9 @@ export default function ProtectedRoute({ children }) {
     )
   }
 
-  // If not logged in, redirect to signup
   if (!user) {
     return <Navigate to="/signup" state={{ from: location }} replace />
   }
 
-  // User is logged in, show the page
   return children
 }
